@@ -1,0 +1,263 @@
+
+footer {
+  background: linear-gradient(135deg, #002366, #00a2ff, #002366, #00a2ff);
+  background-size: 300% 300%;
+  animation: gradientShift 8s ease-in-out infinite;
+  color: #ffffff;
+  padding: 30px 20px 15px;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0px -4px 12px rgba(0, 0, 0, 0.2);
+  border-top: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Footer Container */
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 30px;
+}
+
+/* Logo Section */
+.logo-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  text-align: center;
+  transition: transform 0.4s ease;
+}
+
+.logo-section:hover {
+  transform: scale(1.05);
+}
+
+.logo-section img {
+  max-height: 80px;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+}
+
+.logo-section h1 {
+  font-size: 32px;
+  margin: 0;
+  font-weight: 700;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+  white-space: nowrap;
+}
+
+/* Address Section */
+.address-section {
+  flex: 2;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #f0f8ff;
+}
+
+.address-section strong {
+  font-size: 16px;
+}
+
+/* Download Section */
+.download-section {
+  flex: 1;
+  text-align: center;
+}
+
+.download-section h3 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: #ffffff;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.store-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: nowrap;
+}
+
+.store-icon {
+  height: 52px;
+  border-radius: 14px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
+}
+
+.store-icon:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.4);
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 13px;
+}
+
+/* Social Media Icons */
+.social-media {
+  margin-bottom: 15px;
+}
+
+.social-media a {
+  font-size: 18px;
+  color: #ffffff;
+  margin: 0 10px;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-media a:hover {
+  transform: scale(1.2);
+  color: #ffee58;
+}
+
+/* Footer Links */
+.links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.links ul li a {
+  color: #d9e6ff;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease, font-weight 0.3s ease;
+}
+
+.links ul li a:hover {
+  color: #ffeb3b;
+  text-shadow: 0 0 8px #ffeb3b;
+  font-weight: bold;
+}
+
+
+.add-content {
+  min-height: 60vh;
+}
+
+
+/* .footer-chat {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #0033cc;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  transition: background 0.3s ease;
+  z-index: 999;
+}
+
+.footer-chat:hover {
+  background: #0057ff;
+} */
+
+
+/* Responsive Styles */
+@media (max-width: 980px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .logo-section {
+    justify-content: center;
+  }
+
+  .address-section {
+    flex: unset;
+  }
+
+  .store-buttons {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .logo-section h1 {
+    font-size: 28px;
+  }
+
+  .download-section h3 {
+    font-size: 17px;
+  }
+
+  .store-icon {
+    height: 45px;
+  }
+
+  .social-media a {
+    font-size: 16px;
+    margin: 0 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  footer {
+    padding: 20px 10px;
+  }
+
+  .logo-section h1 {
+    font-size: 24px;
+  }
+
+  .logo-section img {
+    max-height: 60px;
+  }
+
+  .address-section {
+    font-size: 13px;
+  }
+
+  .download-section h3 {
+    font-size: 16px;
+  }
+
+  .store-icon {
+    height: 40px;
+  }
+
+  .social-media a {
+    font-size: 14px;
+    margin: 0 6px;
+  }
+
+  .links ul {
+    gap: 10px;
+  }
+
+  .links ul li a {
+    font-size: 13px;
+  }
+}
+
+/* Reuse the keyframe from your global styles */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}

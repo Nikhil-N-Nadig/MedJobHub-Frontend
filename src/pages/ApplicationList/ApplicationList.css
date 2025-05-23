@@ -1,0 +1,80 @@
+h2.applications-head {
+    color: #002244;
+    font-size: 52px;
+    font-weight: 800;
+    text-align: center;
+    margin: 50px 0 30px;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+  }
+  
+  .applications-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 30px;
+    padding: 40px 60px;
+    max-width: 1400px;
+    margin: auto;
+    min-height: 60vh;
+    animation: fadeIn 0.6s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .no-applications {
+    text-align: center;
+    font-size: 22px;
+    color: #999;
+    font-weight: 600;
+    margin-top: 80px;
+    opacity: 0.8;
+    letter-spacing: 0.5px;
+  }
+  
+  @media (max-width: 1024px) {
+    .applications-container {
+      padding: 30px;
+      gap: 25px;
+    }
+  
+    h2.applications-head {
+      font-size: 44px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    h2.applications-head {
+      font-size: 38px;
+    }
+  
+    .applications-container {
+      padding: 20px;
+      gap: 20px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    h2.applications-head {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+  
+    .applications-container {
+      padding: 15px;
+      gap: 16px;
+    }
+  
+    .no-applications {
+      font-size: 18px;
+    }
+  }
+  

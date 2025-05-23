@@ -1,0 +1,156 @@
+/* General Styles */
+.signin-container1 {
+  width: 100%;
+  height: 100vh;
+  background: url('bg4.jpg') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  box-sizing: border-box;
+  transition: background 0.5s ease-in-out;
+}
+
+/* Glassmorphic Sign-in Form */
+.signin-form-box {
+  width: 100%;
+  max-width: 450px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px);
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.6);
+  border-radius: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.4s ease-in-out;
+  animation: fadeIn 0.6s ease-in-out, floating 3s infinite ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floating {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+  100% { transform: translateY(0); }
+}
+
+/* Heading */
+.signin-form-box h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: #0056b3;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.signin-form-box h1::after {
+  content: "";
+  width: 80px;
+  height: 5px;
+  background: #ff4081;
+  display: block;
+  margin: 10px auto 0;
+  border-radius: 10px;
+  transition: all 0.4s ease-in-out;
+}
+
+/* Input Fields with Black Border Shadow */
+.signin-input-field {
+  background: rgba(255, 255, 255, 0.4);
+  margin: 20px 0;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  padding: 14px 18px;
+  transition: all 0.3s ease-in-out;
+}
+
+.signin-input-field:hover {
+  transform: scale(1.02);
+}
+
+.signin-input-field input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 10px;
+  font-size: 16px;
+  color: #333;
+}
+
+.signin-input-field input::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* Button Styles */
+.signin-btn-field button {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(90deg, #0056b3, #ff4081);
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.4s ease, transform 0.3s;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+
+.signin-btn-field button:hover {
+  background: linear-gradient(90deg, #ff4081, #0056b3);
+  transform: scale(1.08);
+  box-shadow: 0 0 15px rgba(255, 64, 129, 0.5);
+}
+
+.signin-btn-field button:active {
+  transform: scale(0.96);
+}
+
+/* Animated Background Glow */
+.signin-btn-field button::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent);
+  transition: all 0.4s ease;
+  opacity: 0;
+}
+
+.signin-btn-field button:hover::before {
+  opacity: 1;
+  transform: scale(1.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .signin-form-box {
+      width: 90%;
+      padding: 30px;
+  }
+
+  .signin-form-box h1 {
+      font-size: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .signin-form-box {
+      padding: 25px;
+  }
+
+  .signin-form-box h1 {
+      font-size: 28px;
+  }
+}

@@ -1,0 +1,106 @@
+.job-details-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    padding: 40px;
+    background: #f8f9fa;
+  }
+  
+  .job-details-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  
+    width: 60%;
+    max-width: 800px;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+  }
+  
+  .job-title {
+    color: #007bff;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .company-name, .job-location, .job-salary, .posted-date {
+    font-size: 18px;
+    color: #333;
+    margin: 10px 0;
+    display: flex;
+    align-items: center; /* Align text and icon properly */
+    gap: 8px; /* Adds a small space between icon and text */
+}
+
+  .job-description, .additional-details, .job-benefits, .contact-info {
+    margin-top: 20px;
+    text-align: left;
+  }
+  
+  .job-description h3, .job-benefits h3, .contact-info h3 {
+    color: #0056b3;
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+  
+  .job-description p, .job-benefits p, .contact-info p {
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .additional-details p {
+    font-size: 16px;
+    color: #333;
+    margin: 5px 0;
+  }
+  
+  .apply-btn-container {
+    margin-top: 20px;
+  }
+  
+  .apply-btn {
+    display: inline-block;
+    padding: 12px 20px;
+    background: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background 0.3s;
+  }
+  
+  .apply-btn:hover {
+    background: #0056b3;
+  }
+  
+  @media (max-width: 768px) {
+    .job-details-card {
+        width: 90%;
+        padding: 20px;
+    }
+  }
+  
+  .job-box{
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    border:  2px solid #007bff;
+    border-radius: 20px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }

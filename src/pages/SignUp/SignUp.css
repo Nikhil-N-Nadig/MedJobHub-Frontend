@@ -1,0 +1,278 @@
+.signup-container {
+    width: 100%;
+    height: 100%; /* Full viewport height */
+    background: #ffffff82;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding: 2rem;
+    box-sizing: border-box;
+  }
+  
+  .signup-form-box {
+    width: 100%;
+    max-width: 650px;
+    height: 100%; 
+    background: white;
+    padding: 40px 40px; /* Adjusted padding */
+    text-align: center;
+    box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    color: #0033cc;
+    border: 3px solid #00000022;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align items from the top */
+  }
+  
+  .signup-form-box h1 {
+    font-size: 38px; /* Increased header size */
+    margin-top: 0; /* No top margin */
+    margin-bottom: 15px; /* Increased bottom margin */
+    color: #007bff;
+    font-weight: 600;
+  }
+  
+  .signup-form-box h1::after {
+    content: '';
+    width: 70px;
+    height: 5px;
+    background: #007bff;
+    display: block;
+    margin: 12px auto 0;
+    margin-top: 0;
+  }
+  
+  /* Input Fields */
+  .signup-input-field {
+    background: #eaeaea;
+    margin: 25px 6px; /* Increased margin between input fields */
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    padding: 12px 18px;
+  }
+
+  
+
+
+  .signup-input-field input::placeholder,.signup-input-field textarea::placeholder {
+    color: gray;
+    opacity: 1; 
+  }
+  
+  .signup-input-field#resumeField {
+    padding: 18px 18px 20px 15px;
+    position: relative; /* To control label positioning */
+  }
+  
+  .signup-input-field#resumeField i {
+    font-size: 20px;
+    margin-right: 10px;
+    color: #0033cc;
+  }
+  
+  .signup-input-field#resumeField span {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .signup-input-field#resumeField input[type="file"] {
+    display: none; /* Hide the default file input */
+  }
+  
+  .signup-input-field#resumeField label {
+    cursor: pointer;
+    padding: 8px 16px; /* Reduced padding for smaller size */
+    background-color: #007bff;
+    color: white;
+    border-radius: 8px;
+    font-size: 14px; /* Smaller font size */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    right: 10px; /* Move it slightly left from the end */
+  }
+  
+  .signup-input-field#resumeField label:hover {
+    background-color: #0056b3;
+  }
+  
+  .file-name {
+    font-size: 14px;
+    color: #333;
+    word-wrap: break-word;
+  }
+  
+  .signup-form-box input {
+    width: 100%;
+    background: transparent;
+    border: 0;
+    outline: none;
+    padding: 12px;
+    font-size: 16px;
+  }
+  
+  .signup-form-box textarea {
+    width: 100%; /* Ensure the textarea spans the entire width */
+    background: transparent;
+    border: 0;
+    outline: none;
+    padding: 12px;
+    font-size: 16px;
+    resize: none; /* Disable resizing (optional) */
+  }
+  
+  .signup-input-field input,.signup-input-field textarea{
+    color: #222;
+  }
+
+  .signup-form-box select {
+    width: 100%;
+    background: transparent;
+    border: 0;
+    outline: none;
+    padding: 12px;
+    font-size: 16px;
+    color: #333;
+    border-radius: 5px;
+    appearance:none;  /* For consistent appearance across browsers */
+  }
+  
+  /* Buttons */
+  .signup-btn-field {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 35px;
+    margin-bottom: 20px; /* Increased gap below button */
+  }
+  
+
+  .signup-btn-field .loader {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+    margin-left: 8px;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+
+  .signup-btn-field button {
+    padding: 13px 28px;
+    background-color: #007bff;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .signup-btn-field button:hover {
+    background-color: #0056b3;
+  }
+  
+  .signup-form-box form p {
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+  }
+  
+  .signup-form-box form p a {
+    text-decoration: none;
+    color: #0033cc;
+    font-weight: bold;
+  }
+  
+  
+  /* Media Queries for Responsive Design */
+  
+  /* Tablet Screens */
+  @media (max-width: 768px) {
+    .signup-container {
+      padding: 1.5rem;
+    }
+  
+    .signup-form-box {
+      max-width: 90%;
+      padding: 30px;
+    }
+  
+    .signup-form-box h1 {
+      font-size: 30px;
+    }
+  
+    .signup-input-field {
+      padding: 10px 15px;
+    }
+  
+    .signup-form-box input, textarea, select {
+      font-size: 14px;
+      padding: 10px;
+    }
+  
+    .signup-btn-field {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .signup-btn-field button {
+      width: 100%;
+      padding: 12px;
+    }
+  
+    .signup-form-box form p {
+      font-size: 13px;
+    }
+  }
+  
+  /* Mobile Screens */
+  @media (max-width: 480px) {
+    .signup-form-box {
+      padding: 20px;
+    }
+  
+    .signup-form-box h1 {
+      font-size: 26px;
+    }
+  
+    .signup-input-field {
+      margin: 12px 0;
+      padding: 8px 12px;
+    }
+  
+    .signup-form-box  input, textarea, select {
+      font-size: 14px;
+      padding: 8px;
+    }
+  
+    .signup-btn-field button {
+      font-size: 16px;
+      width: 100%;
+    }
+  
+    .signup-form-box form p {
+      font-size: 12px;
+    }
+    .signup-input-field#resumeField span {
+      font-size: 14px;
+      color: #333;
+    }
+  }

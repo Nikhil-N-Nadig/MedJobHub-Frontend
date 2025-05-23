@@ -1,0 +1,121 @@
+.jobs-head {
+    color: #1a1a1a;
+    font-size: 52px;
+    font-weight: 800;
+    text-align: center;
+    margin: 60px 0 10px;
+    letter-spacing: -0.5px;
+    background: linear-gradient(90deg, #002855, #0055cc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: fadeInDown 0.6s ease-in-out;
+  }
+  
+  .job-info {
+    font-size: 20px;
+    color: #555;
+    text-align: center;
+    margin-bottom: 30px;
+    line-height: 1.6;
+    opacity: 0.85;
+    animation: fadeIn 0.8s ease-in-out;
+  }
+  
+  .job-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 40px;
+    padding: 50px 60px;
+    max-width: 1400px;
+    margin: auto;
+    min-height: 60vh;
+    animation: slideUp 0.6s ease-in-out;
+  }
+  
+  .add-job-info {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    color: #002244;
+    margin: 40px 0 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @media (max-width: 1024px) {
+    .job-container {
+      padding: 40px;
+      gap: 30px;
+    }
+  
+    .jobs-head {
+      font-size: 44px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .jobs-head {
+      font-size: 38px;
+      margin-top: 40px;
+    }
+  
+    .job-info {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+  
+    .job-container {
+      padding: 30px 20px;
+      gap: 25px;
+    }
+  
+    .add-job-info {
+      font-size: 20px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .jobs-head {
+      font-size: 32px;
+    }
+  
+    .job-info {
+      font-size: 16px;
+    }
+  
+    .add-job-info {
+      font-size: 18px;
+    }
+  }
+  
