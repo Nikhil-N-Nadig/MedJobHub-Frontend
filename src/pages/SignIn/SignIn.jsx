@@ -6,6 +6,7 @@ import backendService from "../../Flask_service/flask";
 import { useDispatch } from "react-redux";
 import { login as authlogin } from "../../store/authSlice";
 import { useFlash } from "../../context/FlashContext";
+import { Link } from "react-router-dom";
 
 const SignIn = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });

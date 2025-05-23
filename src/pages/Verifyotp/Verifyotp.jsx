@@ -37,6 +37,7 @@ const Verifyotp = () => {
                 setFlashMessage(response.message || "OTP verification failed!", "error");
             }
         } catch (err) {
+            console.log("Verify otp error :",err)
             setFlashMessage("OTP verification failed at Backend service! Try Again.", "error");
         }
     };

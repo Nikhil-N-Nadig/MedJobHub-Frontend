@@ -11,5 +11,4 @@ import JobListings from "./JobsList/JobsList";
 import JobApplications from "./ApplicationList/ApplicationList";
 import JobInfo from "./JobInfo/JobInfo";
 import JobDetails from "./JobDetails/JobDetails";
-import ChatBox from "./ChatBox/ChatBox";
-export {Home,About,Jobs,ContactUs,SignIn,SignUp,Verifyotp,AddJobForm,ApplyJobForm,JobListings,JobApplications,JobInfo,JobDetails,ChatBox}
+export {Home,About,Jobs,ContactUs,SignIn,SignUp,Verifyotp,AddJobForm,ApplyJobForm,JobListings,JobApplications,JobInfo,JobDetails}

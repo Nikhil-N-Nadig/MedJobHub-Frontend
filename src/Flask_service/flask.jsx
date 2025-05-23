@@ -3,7 +3,7 @@ import axios from "axios";
 class BackendService {
   constructor() {
     this.api = axios.create({
-      baseURL: process.env.BACKEND_URI, 
+      baseURL: import.meta.env.VITE_BACKEND_URI, 
       withCredentials: true, 
     });
   }
@@ -30,7 +30,7 @@ class BackendService {
 
   async verifyOtp({ username, otp }) {
     try {
-      const response = await this.api.post("/verify_otp", { username, otp });
+      const response = await this.api.post("/verify_otp", { username, otp },{withCredentials:true});
       return response.data;
     } catch (error) {
       throw error.response?.data || "OTP verification failed";
