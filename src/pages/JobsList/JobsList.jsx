@@ -6,6 +6,7 @@ import backendService from "../../Flask_service/flask";
 import { useSelector } from "react-redux";
 import "../JobsList/JobsList.css"
 import { useFlash } from "../../context/FlashContext";
+import { Link } from "react-router-dom";
 const JobListings = () => {
   const [jobs, setJobs] = useState([]);
   const { setFlashMessage } =useFlash()
@@ -63,7 +64,7 @@ const JobListings = () => {
         <>
           <p className="add-job-info">Click here to add more job opportunities and grow your team!</p>
           <div className="jobcard-btn-field">
-            <a href="/add-job">Add a New Job</a>
+            <Link to="/add-job">Add a New Job</Link>
           </div>
         </>
       )}

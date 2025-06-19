@@ -100,21 +100,21 @@ const ApplicationCard = ({ application, userRole, userId, onUpdateStatus, onWith
               
               <Link
                 to={`/chat/${userId}/${application.applicant.id}`}
-                className="apply-btn"
-                style={{ marginTop: "5px", backgroundColor: "#2e8b57" }}
+                className="appli-apply-btn"
+                style={{ marginTop: "5px" }}
               >
                 Chat with Candidate
               </Link>
             </>
           ) : (
             <>
-              <button type="button" className="apply-btn" onClick={openModal} disabled={withdrawing}>
+              <button type="button" className="appli-apply-btn" onClick={openModal} disabled={withdrawing}>
                 {withdrawing ? "Withdrawing..." : "Withdraw Application"}
               </button>
 
               <Link
                 to={`/chat/${userId}/${application.job.posted_by}`}
-                className="apply-btn"
+                className="appli-apply-btn"
                 style={{ marginTop: "5px", backgroundColor: "#2e8b57" }}
               >
                 Chat with Employer

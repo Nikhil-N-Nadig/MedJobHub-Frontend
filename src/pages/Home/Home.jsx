@@ -2,6 +2,7 @@ import React from "react";
 import { replace, useNavigate} from 'react-router-dom'
 import '../Home/Home.css'
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useFlash } from "../../context/FlashContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers, faHospital, faBriefcase, faTrophy, faHeartbeat, faUserMd, faLaptop } from "@fortawesome/free-solid-svg-icons";
@@ -151,7 +152,7 @@ const Home=()=>{
             A challenging role for experienced medical officers to provide
             quality care in a fast-paced hospital environment.
           </p>
-          <a href="/job-listings" className="apply-button">Apply Now</a>
+          <Link to="/job-listings" className="apply-button">Apply Now</Link>
         </div>
         <div className="home-job-card">
           <h3>Laboratory Technician</h3>
@@ -163,7 +164,7 @@ const Home=()=>{
             Join a cutting-edge lab to perform critical tests and contribute to
             groundbreaking healthcare innovations.
           </p>
-          <a href="/job-listings" className="apply-button">Apply Now</a>
+          <Link to="/job-listings" className="apply-button">Apply Now</Link>
         </div>
         <div className="home-job-card">
           <h3>Health Inspector</h3>
@@ -175,7 +176,7 @@ const Home=()=>{
             Inspect and ensure healthcare facilities meet regulatory standards
             while maintaining public safety.
           </p>
-          <a href="/job-listings" className="apply-button">Apply Now</a>
+          <Link to="/job-listings" className="apply-button">Apply Now</Link>
         </div>
         <div className="home-job-card">
           <h3>Lab Technician</h3>
@@ -187,7 +188,7 @@ const Home=()=>{
             Great opportunity for recent graduates to gain hands-on experience
             in laboratory procedures and technologies.
           </p>
-          <a href="/job-listings" className="apply-button">Apply Now</a>
+          <Link to="/job-listings" className="apply-button">Apply Now</Link>
         </div>
       </div>
     </section>
