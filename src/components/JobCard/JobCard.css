@@ -102,25 +102,9 @@
   gap: 12px;
   transition: all 0.3s ease;
   position: relative;
-  padding-left: 25px;
   font-family: "Poppins", sans-serif;
 }
 
-.job-card p::before {
-  content: '▶';
-  position: absolute;
-  left: 0;
-  color: #00a2ff;
-  font-size: 12px;
-  font-weight: bold;
-  transition: all 0.3s ease;
-  filter: drop-shadow(0 0 4px rgba(0, 162, 255, 0.3));
-}
-
-.job-card:hover p::before {
-  transform: translateX(5px);
-  color: #002366;
-}
 
 .job-card:hover p {
   color: #001a52;
