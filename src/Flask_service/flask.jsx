@@ -183,7 +183,7 @@ class BackendService {
     }
   }
 
-  // Profile management methods
+  
   async getProfile() {
     try {
       const response = await this.api.get("/profile", { withCredentials: true });

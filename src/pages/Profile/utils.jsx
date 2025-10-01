@@ -1,6 +1,31 @@
 //helper util functions for profile page
 import { FaEdit, FaSave, FaTimes } from "react-icons/fa";
 
+export const ReadOnlyField = ({ 
+  label, 
+  value, 
+  icon: Icon
+}) => {
+  return (
+    <div className="editable-field">
+      
+      <div className="field-header">
+        <div className="field-icon-title">
+          <Icon className="field-icon" />
+          <h3 className="field-title">{label}</h3>
+        </div>
+      </div>
+
+      <div className="field-content">
+        <p className={`field-display ${!value ? 'empty' : ''}`}>
+          {value || "Not provided"}
+        </p>
+      </div>
+
+    </div>
+  );
+};
+
 export const EditableField = ({ 
   label, 
   value, 

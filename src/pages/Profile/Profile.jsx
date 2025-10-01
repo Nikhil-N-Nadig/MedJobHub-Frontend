@@ -9,12 +9,9 @@ import {
   FaStethoscope, FaAward, FaClock, FaEdit, FaSave, FaTimes, FaUsers, FaCamera
 } from "react-icons/fa";
 import { useFlash } from "../../context/FlashContext";
-import { EditableField } from "./utils";
+import { EditableField, ReadOnlyField } from "./utils";
 import backendService from "../../Flask_service/flask";
 import "./Profile.css";
-
-// Simple EditableField component without memo
-
 
 const Profile = () => {
   const user = useSelector((state) => state.auth.userData);
@@ -50,6 +47,7 @@ const Profile = () => {
 
   const [profileData, setProfileData] = useState({
     // general common fields
+    username: "",
     first_name: "",
     last_name: "",
     phone: "",
@@ -104,6 +102,7 @@ const Profile = () => {
           
             setProfileData(prev => ({
               ...prev,
+              username: user.username || "",
               first_name: user.first_name || "",
               last_name: user.last_name || "",
               phone: user.phone || "",
@@ -119,6 +118,7 @@ const Profile = () => {
           
           setProfileData(prev => ({
             ...prev,
+            username: user.username || "",
             first_name: user.first_name || "",
             last_name: user.last_name || "",
             phone: user.phone || "",
@@ -318,6 +318,8 @@ const Profile = () => {
         </div>
 
         <div className="profile-fields-grid">
+  
+          <ReadOnlyField label="Username" value={profileData.username} icon={FaUser} />
   
           <EditableField label="First Name" value={profileData.first_name} fieldName="first_name" icon={FaUser} placeholder="Enter your first name" isEditing={editingFields.first_name} isLoading={loading.first_name} profileData={profileData} onInputChange={handleInputChange} onEditField={handleEditField} onSaveField={handleSaveField} onCancelEdit={handleCancelEdit}/>
           
