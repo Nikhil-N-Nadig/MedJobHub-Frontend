@@ -7,6 +7,8 @@ import {login as authlogin,logout as authlogout} from "./store/authSlice"
 import backendService from './Flask_service/flask';
 import { useFlash } from "./context/FlashContext";
 import { useNavigate } from 'react-router-dom';
+import { ChatProvider } from './context/ChatContext';
+
 function App() {
 
   const dispatch=useDispatch();
@@ -43,13 +45,13 @@ function App() {
 }, [dispatch]);
 
   return (
-    <>
-        <Header />
-        <main>
+    <ChatProvider>
+      <Header />
+      <main>
         <Outlet/>
-        </main>
-        <Footer />
-    </>
+      </main>
+      <Footer />
+    </ChatProvider>
   )
 }
 

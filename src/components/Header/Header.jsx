@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Logout from "../Logout/Logout";
+import ChatNotification from "../ChatNotification/ChatNotification";
 import "../Header/Header.css";
 
 const images = {
@@ -58,6 +59,7 @@ function Header() {
                     <li><Link to="/job-applications" className={location.pathname === "/job-applications" ? "active" : ""} onClick={toggleMenu}>Applied Jobs</Link></li>
                   </>
                 )}
+                <li><Link to="/chat" className={location.pathname === "/chat" ? "active" : ""} onClick={toggleMenu}>Messages</Link></li>
                 <li><Link to="/profile" className={location.pathname === "/profile" ? "active" : ""} onClick={toggleMenu}>Profile</Link></li>
                 <li><Logout /></li>
               </>
@@ -97,6 +99,8 @@ function Header() {
                     <li><Link to="/job-applications" className={location.pathname === "/job-applications" ? "active" : ""}>Applied Jobs</Link></li>
                   </>
                 )}
+                <li><Link to="/chat" className={location.pathname === "/chat" ? "active" : ""}>Messages</Link></li>
+                <li><ChatNotification /></li>
                 <li><Link to="/profile" className={location.pathname === "/profile" ? "active" : ""}>Profile</Link></li>
                 <li><Logout /></li>
               </>
