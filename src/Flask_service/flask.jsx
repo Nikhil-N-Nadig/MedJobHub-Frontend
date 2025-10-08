@@ -182,6 +182,48 @@ class BackendService {
       throw error.response?.data || "Failed to send response email";
     }
   }
+
+  
+  async getProfile() {
+    try {
+      const response = await this.api.get("/profile", { withCredentials: true });
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || "Failed to fetch profile";
+    }
+  }
+
+  async getCurrentUserProfile() {
+    try {
+      const response = await this.api.get("/current_user_profile", { withCredentials: true });
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || "Failed to fetch current user profile";
+    }
+  }
+
+  async updateProfile(profileData) {
+    try {
+      const response = await this.api.post("/update_profile", profileData, { withCredentials: true });
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || "Failed to update profile";
+    }
+  }
+
+  async uploadProfilePicture(file) {
+    try {
+      const formData = new FormData();
+      formData.append('profile_pic', file);
+      const response = await this.api.post("/upload_profile_picture", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+        withCredentials: true
+      });
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || "Failed to upload profile picture";
+    }
+  }
 }
 
 const backendService = new BackendService();

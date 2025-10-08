@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import {Home,About,Jobs,ContactUs, SignIn, SignUp, Verifyotp,AddJobForm,ApplyJobForm,JobApplications,JobListings, JobInfo,JobDetails} from './pages'
+import {Home,About,Jobs,ContactUs, SignIn, SignUp, Verifyotp,AddJobForm,ApplyJobForm,JobApplications,JobListings, JobInfo,JobDetails, Profile} from './pages'
 import App from './App'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { store } from '../src/store/store'
@@ -64,6 +64,10 @@ const route = createBrowserRouter([
       { 
         path: "/jobs/:jobType", 
         element: <JobDetails /> 
+      },
+      {
+        path : "/profile",
+        element : <Profile/>
       },
     ],
   },
