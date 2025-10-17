@@ -1,12 +1,14 @@
 import './App.css'
 import {Header,Footer} from './components'
-import {Outlet} from 'react-router-dom'
+import { Outlet, BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import {login as authlogin,logout as authlogout} from "./store/authSlice"
 import backendService from './Flask_service/flask';
 import { useFlash } from "./context/FlashContext";
 import { useNavigate } from 'react-router-dom';
+import { Jobs, JobInfo, Home } from "./pages"; // adjust import paths
+
 function App() {
 
   const dispatch=useDispatch();

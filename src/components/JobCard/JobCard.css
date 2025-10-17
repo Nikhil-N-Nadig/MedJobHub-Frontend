@@ -20,6 +20,7 @@
   color: #002366;
   position: relative;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 .job-card::before {
@@ -103,6 +104,15 @@
   transition: all 0.3s ease;
   position: relative;
   font-family: "Poppins", sans-serif;
+}
+
+.job-card p.job-description {
+  display: block;
+  max-width: 100%;
+  white-space: normal;        /* allow wrapping to next line */
+  overflow-wrap: break-word; /* break long words if needed */
+  word-break: break-word;    /* ensure very long strings wrap */
+  hyphens: auto;             /* enable hyphenation where supported */
 }
 
 
