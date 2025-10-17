@@ -5,7 +5,7 @@ import { useFlash } from "../../context/FlashContext";
 import ConfirmModal from "../ConfirmModel/ConfirmModel";
 import { Link } from "react-router-dom";
 
-const ApplicationCard = ({ application, userRole, userId, onUpdateStatus, onWithdraw }) => {
+const ApplicationCard = ({ application, userRole, userId, onUpdateStatus, onWithdraw, headerTitle }) => {
   const [status, setStatus] = useState(application.application_status);
   const { setFlashMessage } = useFlash();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -64,10 +64,23 @@ const ApplicationCard = ({ application, userRole, userId, onUpdateStatus, onWith
     setLoading(false); 
   };
 
+  // prefer provided headerTitle, otherwise fall back to sensible defaults
+  const displayTitle =
+    headerTitle ||
+    (application?.applicant?.name || application?.applicant?.username) ||
+    application?.job?.company ||
+    application?.job?.title ||
+    "Details";
+
   return (
     <>
       <div className="application-card">
-        <h3>{application.applicant_name}</h3>
+        {/* header */}
+        <div className="application-card-header">
+          <h3 className="application-title">{displayTitle}</h3>
+        </div>
+
+        {/* card body */}
         <p><strong>Applied To:</strong> {application.job.title}</p>
         <p><strong>Email:</strong> {application.email}</p>
         <p><strong>Phone:</strong> {application.phone}</p>

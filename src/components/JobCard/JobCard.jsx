@@ -40,7 +40,7 @@ const JobCard = ({ job, userRole, userId, onDeleteJob }) => {
       <p><FaMapMarkerAlt /> {job.location}</p>
       <p><FaMoneyBill /> ₹{job.salary.toFixed(2)} LPA</p>
       <p><strong>Posted On:</strong> {new Date(job.posted_on).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })}</p>
-      <p><strong>Description:</strong> {job.description}</p>
+      <p className="job-description"><strong>Description:</strong> {job.description}</p>
       <p><strong>Employer:</strong> {job.employer.username}</p>
       
       <Link to={`/job-listings/job-info/${job.id}`} className="apply-btn more-info">
