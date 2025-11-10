@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import backendService from "../../Flask_service/flask";
 import { FaUser, FaEnvelope, FaPhone, FaGraduationCap, FaBriefcase, FaClock, FaDollarSign, FaFileAlt } from "react-icons/fa";
@@ -24,6 +24,63 @@ const ApplyJobForm = () => {
   const navigate = useNavigate();
 
   const user = useSelector((state) => state.auth.userData);
+
+  // populate form from redux user / server profile if available
+  useEffect(() => {
+    const mergeProfile = async () => {
+      try {
+        // first try values from redux user
+        const fromUser = {};
+        if (user) {
+          const name = user.name || `${(user.first_name || "").trim()} ${(user.last_name || "").trim()}`.trim();
+          if (name) fromUser.applicant_name = name;
+          if (user.email) fromUser.email = user.email;
+          if (user.phone) fromUser.phone = user.phone;
+          // profile may be nested
+          const prof = user.profile || user.user_profile || {};
+          if (prof) {
+            if (prof.qualifications) fromUser.qualifications = prof.qualifications;
+            if (prof.experience) fromUser.experience = prof.experience;
+            if (prof.expected_salary) fromUser.expected_salary = prof.expected_salary;
+          }
+        }
+
+        // if some important fields still missing, try fetch current user profile
+        const needsFetch = !fromUser.email || !fromUser.phone || !fromUser.applicant_name;
+        if (needsFetch) {
+          try {
+            const resp = await backendService.getCurrentUserProfile();
+            // prefer resp.user, then resp.profile, then resp.data
+            const profile = resp?.user || resp?.profile || resp?.data || {};
+            if (profile) {
+              // combine first_name + last_name if available
+              const first = (profile.first_name || "").trim();
+              const last = (profile.last_name || "").trim();
+              const combined = [first, last].filter(Boolean).join(" ");
+              const fallbackName = profile.full_name || profile.name || "";
+              if (combined || fallbackName) {
+                fromUser.applicant_name = fromUser.applicant_name || combined || fallbackName;
+              }
+              if (profile.email) fromUser.email = fromUser.email || profile.email;
+              if (profile.phone) fromUser.phone = fromUser.phone || profile.phone;
+              // keep other profile fields if present
+              if (profile.qualifications) fromUser.qualifications = fromUser.qualifications || profile.qualifications;
+              if (profile.experience) fromUser.experience = fromUser.experience || profile.experience;
+              if (profile.expected_salary) fromUser.expected_salary = fromUser.expected_salary || profile.expected_salary;
+            }
+          } catch (e) {
+            // ignore, fallback to whatever we had from redux
+          }
+        }
+
+        // merge into state (do not overwrite any manual changes if already present)
+        setFormData((prev) => ({ ...prev, ...fromUser }));
+      } catch (e) {
+        // noop
+      }
+    };
+    mergeProfile();
+  }, [user]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

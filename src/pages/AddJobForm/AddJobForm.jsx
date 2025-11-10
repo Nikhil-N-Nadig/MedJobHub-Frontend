@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import backendService from "../../Flask_service/flask";
 import { useFlash } from "../../context/FlashContext";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { 
   FaBriefcase, FaBuilding, FaMapMarkerAlt, FaInfoCircle, FaDollarSign, FaClock, 
   FaUserMd, FaGraduationCap, FaHospital, FaCalendar, FaGift, FaEnvelope, FaPhone 
@@ -30,6 +31,54 @@ const AddJobForm = () => {
   const [loading, setLoading] = useState(false);
   const { setFlashMessage } = useFlash();
   const navigate = useNavigate();
+  const user = useSelector((state) => state.auth.userData);
+
+  useEffect(() => {
+    const fillFromProfile = async () => {
+      try {
+        const fromUser = {};
+        // prefer redux user fields
+        if (user) {
+          if (user.email) fromUser.contact_email = user.email;
+          if (user.phone) fromUser.contact_phone = user.phone;
+          if (user.company_name) fromUser.company = user.company_name; // <- use company_name from backend
+          if (user.location) fromUser.location = user.location;
+        }
+
+        // if any required fields missing, try backend profile
+        const needs = !fromUser.contact_email || !fromUser.contact_phone || !fromUser.company || !fromUser.location;
+        if (needs) {
+          try {
+            const resp = await backendService.getCurrentUserProfile();
+            const profile = resp?.user || resp?.profile || resp?.data || {};
+            if (profile) {
+              if (!fromUser.contact_email && profile.email) fromUser.contact_email = profile.email;
+              if (!fromUser.contact_phone && profile.phone) fromUser.contact_phone = profile.phone;
+              // prefer profile.company_name field when present
+              if (!fromUser.company && (profile.company_name || profile.company || profile.organization)) {
+                fromUser.company = profile.company_name || profile.company || profile.organization;
+              }
+              if (!fromUser.location && (profile.location || profile.address)) fromUser.location = profile.location || profile.address;
+            }
+          } catch (e) {
+            // ignore
+          }
+        }
+
+        // merge into state without overwriting existing manual input
+        setFormData((prev) => ({
+          ...prev,
+          contact_email: prev.contact_email || fromUser.contact_email || "",
+          contact_phone: prev.contact_phone || fromUser.contact_phone || "",
+          company: prev.company || fromUser.company || "",
+          location: prev.location || fromUser.location || ""
+        }));
+      } catch (e) {
+        // noop
+      }
+    };
+    fillFromProfile();
+  }, [user]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
