@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef} from "react";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import { 
@@ -236,6 +236,7 @@ const Profile = () => {
 
   const isJobSeeker = user.role === "job_seeker";
   const isEmployer = user.role === "employer";
+  const [isLoading, setIsLoading] = useState(false);
 
 
   return (
@@ -384,6 +385,48 @@ const Profile = () => {
 
         </div>
       </div>
+      <div style={{ textAlign: "center", marginTop: "5px", marginBottom: "30px" }}>
+      <button
+        className="generate-resume-btn"
+        onClick={async () => {
+          setIsLoading(true);
+          try {
+            const response = await fetch("http://127.0.0.1:5001/generate_resume", {
+              method: "GET",
+              credentials: "include",
+            });
+
+            if (!response.ok) throw new Error("Failed to generate resume");
+
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = `${profileData.first_name || "User"}_Resume.pdf`;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            window.URL.revokeObjectURL(url);
+          } catch (error) {
+            setFlashMessage("Error generating resume. Please try again.", "error");
+          } finally {
+            setIsLoading(false);
+          }
+        }}
+        disabled={isLoading}
+      >
+        {isLoading ? "⏳ Generating..." : "📄 Generate Resume"}
+      </button>
+
+      {isLoading && (
+        <div className="loading-spinner" style={{ marginTop: "3px" }}>
+          <div className="spinner"></div>
+          <p style={{ fontSize: "14px", color: "#007bff" }}>Preparing your PDF...</p>
+        </div>
+      )}
+    </div>
+
+
     </div>
   );
 };
