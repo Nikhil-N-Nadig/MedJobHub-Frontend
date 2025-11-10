@@ -419,7 +419,13 @@ const Profile = () => {
       </button>
 
       {isLoading && (
-        <div className="loading-spinner" style={{ marginTop: "3px" }}>
+        <div className="loading-spinner" style={{
+          marginTop: "10px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}>
           <div className="spinner"></div>
           <p style={{ fontSize: "14px", color: "#007bff" }}>Preparing your PDF...</p>
         </div>

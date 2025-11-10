@@ -88,9 +88,7 @@ body {
     filter: brightness(1.1); /* Slight brightness increase */
   }
   
-  
-  
-  
+
   .responsibilities-border {
     flex-basis: 100%;
     line-height: 1.6;
@@ -652,6 +650,81 @@ body {
       grid-column: 2; /* Keeps it centered */
     }
   }
+
+/* 🔹 Right-side filter sidebar */
+.filter-sidebar {
+  position: fixed;
+  top: 0;
+  right: -400px; /* hidden off-screen */
+  width: 350px;
+  height: 100vh;
+  background: #f8fbff;
+  box-shadow: -4px 0 15px rgba(0, 0, 0, 0.1);
+  border-left: 2px solid #e0ecff;
+  padding: 20px 24px;
+  transition: right 0.4s ease;
+  z-index: 9999;
+  overflow-y: auto;
+  border-radius: 12px 0 0 12px;
+}
+
+.filter-sidebar.open {
+  right: 0; /* slides in */
+}
+
+.filter-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #003b91;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.filter-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.filter-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: #0056b3;
+  transition: color 0.2s ease;
+}
+.filter-close:hover {
+  color: #ff4d4d;
+}
+
+/* Floating button for opening filter sidebar */
+.filter-toggle-btn {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  display: inline-block;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #007bff 0%, #00aaff 100%);
+  border-radius: 12px;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(0, 123, 255, 0.3);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 9998;
+}
+
+.filter-toggle-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 123, 255, 0.4);
+}
+
 
   /* Filter card */
 .filter-card {

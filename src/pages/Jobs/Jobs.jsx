@@ -240,79 +240,84 @@ const JobListings = () => {
       <h2 className="jobs-head">{role === "employer" ? "Your Jobs" : "Available Jobs"}</h2>
 
       {/* Filter UI - collapsible panel */}
-      <div className={`filter-panel ${showFilters ? "open" : "closed"}`} style={{ maxWidth: 1100, margin: "0 auto 16px", position: "relative" }}>
+      {/* Right-side sliding filter panel */}
+      <div
+        className={`filter-sidebar ${showFilters ? "open" : ""}`}
+      >
         <button
-          className="filter-toggle"
-          aria-expanded={showFilters}
-          onClick={() => setShowFilters((s) => !s)}
-          title="Toggle filters"
+          className="filter-close"
+          onClick={() => setShowFilters(false)}
+          aria-label="Close filters"
         >
-          Filters {showFilters ? "▴" : "▾"}
+          ✕
         </button>
 
-        <section className="filter-card" aria-label="Job filters">
-          <div className="filter-row">
-           <input className="filter-input narrow-30" placeholder="Search jobs, keywords..." value={q} onChange={(e)=>setQ(e.target.value)} />
-           <input className="filter-input narrow-30" placeholder="Location" value={location} onChange={(e)=>setLocation(e.target.value)} />
-           <input className="filter-input narrow-30" placeholder="Qualifications " value={qualifications} onChange={(e)=>setQualifications(e.target.value)} />
-           <input className="filter-input narrow-30" placeholder="Specialization " value={specialization} onChange={(e)=>setSpecialization(e.target.value)} />
-            <select className="filter-input" value={employmentType} onChange={(e)=>setEmploymentType(e.target.value)}>
-              <option value="">Any type</option>
-              <option value="Full-time">Full-time</option>
-              <option value="Part-time">Part-time</option>
-              <option value="Contract">Contract</option>
-            </select>
+        <h3 className="filter-title">Filters</h3>
+
+        <div className="filter-content">
+          <input className="filter-input" placeholder="Search jobs, keywords..." value={q} onChange={(e)=>setQ(e.target.value)} />
+          <input className="filter-input" placeholder="Location" value={location} onChange={(e)=>setLocation(e.target.value)} />
+          <input className="filter-input" placeholder="Qualifications" value={qualifications} onChange={(e)=>setQualifications(e.target.value)} />
+          <input className="filter-input" placeholder="Specialization" value={specialization} onChange={(e)=>setSpecialization(e.target.value)} />
+
+          <select className="filter-input" value={employmentType} onChange={(e)=>setEmploymentType(e.target.value)}>
+            <option value="">Any type</option>
+            <option value="Full-time">Full-time</option>
+            <option value="Part-time">Part-time</option>
+            <option value="Contract">Contract</option>
+          </select>
+
+          <label className="small-label">Date</label>
+          <input className="filter-input small" type="date" value={dateFrom} onChange={(e)=>setDateFrom(e.target.value)} />
+
+          <label className="small-label">Salary</label>
+          <div style={{ display: "flex", gap: "8px" }}>
+            <input className="filter-input small" type="number" placeholder="Min" value={minSalary} onChange={(e)=>setMinSalary(e.target.value)} />
+            <input className="filter-input small" type="number" placeholder="Max" value={maxSalary} onChange={(e)=>setMaxSalary(e.target.value)} />
           </div>
 
-         <div className="filter-row">
-           <div className="small-inputs">
-             <label className="small-label">Date</label>
-             <input className="filter-input small" type="date" value={dateFrom} onChange={(e)=>setDateFrom(e.target.value)} />
-           </div>
-           <div className="small-inputs">
-             <label className="small-label">Salary</label>
-             <input className="filter-input small salary-input" type="number" placeholder="Min" value={minSalary} onChange={(e)=>setMinSalary(e.target.value)} min="0" />
-             <input className="filter-input small salary-input" type="number" placeholder="Max" value={maxSalary} onChange={(e)=>setMaxSalary(e.target.value)} min="0" />
-           </div>
+          <label className="small-label">Min Experience (yrs)</label>
+          <input className="filter-input small" type="number" placeholder="e.g. 2" value={minExperience} onChange={(e)=>setMinExperience(e.target.value)} />
 
-           <div className="small-inputs">
-             <label className="small-label">Min Experience (yrs)</label>
-             <input className="filter-input small" type="number" placeholder="e.g. 2" value={minExperience} onChange={(e)=>setMinExperience(e.target.value)} min="0" />
-           </div>
-
-           <div style={{ display: "flex", gap: 8, alignItems: "center", marginLeft: "auto" }}>
-             {/* For non-employer this triggers server fetch, for employer it reapplies client filters */}
-             <button className="btn primary" onClick={handleSearch}>Search</button>
-             <button className="btn" onClick={resetFilters}>Reset</button>
-
-             <div className="sort-wrapper" ref={sortRef}>
-               <button className="btn" onClick={() => setSortOpen(s => !s)} aria-haspopup="true" aria-expanded={sortOpen}>
-                 Sort ▾
-               </button>
-               {sortOpen && (
-                 <div className="sort-dropdown">
-                   <button className="sort-item" onClick={() => { setSortOption("experience_asc"); setSortOpen(false); }}>Experience ↑</button>
-                   <button className="sort-item" onClick={() => { setSortOption("experience_desc"); setSortOpen(false); }}>Experience ↓</button>
-                   <hr />
-                   <button className="sort-item" onClick={() => { setSortOption("salary_asc"); setSortOpen(false); }}>Salary ↑</button>
-                   <button className="sort-item" onClick={() => { setSortOption("salary_desc"); setSortOpen(false); }}>Salary ↓</button>
-                   <hr />
-                   <button className="sort-item" onClick={() => { setSortOption("date_asc"); setSortOpen(false); }}>Date ↑</button>
-                   <button className="sort-item" onClick={() => { setSortOption("date_desc"); setSortOpen(false); }}>Date ↓</button>
-                   <hr />
-                   <button className="sort-item" onClick={() => { setSortOption(""); setSortOpen(false); }}>Clear</button>
-                 </div>
-               )}
-             </div>
-           </div>
-         </div>
-        </section>
+          <div style={{ display: "flex", justifyContent: "space-between", marginTop: "20px" }}>
+            <button className="btn primary" onClick={handleSearch}>Apply</button>
+            <button className="btn" onClick={resetFilters}>Reset</button>
+          </div>
+        </div>
       </div>
 
+      {/* Floating Filters button */}
+      <button
+        className="filter-toggle-btn"
+        onClick={() => setShowFilters(true)}
+      >
+        ⚙️ Filters
+      </button>
+
       {/* results bar: top-left count (outside job container) */}
-      <div className="results-bar" style={{ maxWidth: 1100, margin: "0 auto 12px", padding: "0 12px", boxSizing: "border-box" }}>
-        <div className="results-count" style={{ color: "#1b3a57", fontSize: "0.95rem" }}>
-          {total > 0 ? <><strong>{total}</strong> result{total === 1 ? "" : "s"}</> : null}
+      <div
+        className="results-bar"
+        style={{
+          display: "inline-block",
+          padding: "8px 16px",
+          background: "linear-gradient(135deg, #007bff 0%, #00aaff 100%)",
+          borderRadius: "8px",
+          color: "white",
+          fontSize: "1.2rem",
+          fontWeight: "500",
+          boxShadow: "0 2px 6px rgba(0, 123, 255, 0.3)",
+          margin: "8px 0 12px 120px",
+        }}
+      >
+        <div className="results-count">
+          {total > 0 ? (
+            <>
+              <strong style={{ fontWeight: "600" }}>{total}</strong>{" "}
+              Result{total === 1 ? "" : "s"}
+            </>
+          ) : (
+            "No results"
+          )}
         </div>
       </div>
 
