@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import React, { createContext, useContext, useReducer, useEffect, useCallback } from 'react';
 import socketService from '../services/socketService';
 import chatService from '../services/chatService';
 import { useSelector } from 'react-redux';
@@ -124,18 +124,61 @@ export function ChatProvider({ children }) {
   const [state, dispatch] = useReducer(chatReducer, initialState);
   const user = useSelector((state) => state.auth.userData);
 
-  // Initialize socket connection
+  // Load unread count
+  const loadUnreadCount = useCallback(async () => {
+    try {
+      const response = await chatService.getUnreadCount();
+      if (response.success) {
+        console.log('Unread count updated:', response.total_unread); // Debug log
+        dispatch({ 
+          type: CHAT_ACTIONS.SET_UNREAD_COUNT, 
+          payload: { 
+            total: response.total_unread, 
+            conversations: response.unread_conversations 
+          } 
+        });
+      }
+    } catch (error) {
+      console.error('Failed to load unread count:', error);
+    }
+  }, []);
+
+  // Initialize socket connection and load initial data
   useEffect(() => {
     if (user) {
       const socket = socketService.connect();
       
+      // Load initial unread count when user is authenticated
+      // Use a small delay to ensure user context is fully loaded
+      setTimeout(() => {
+        loadUnreadCount();
+      }, 500);
+      
+      // Set up periodic refresh of unread count (every 30 seconds)
+      const unreadCountInterval = setInterval(() => {
+        loadUnreadCount();
+      }, 30000);
+
+      // Refresh unread count when window gains focus
+      const handleFocus = () => {
+        loadUnreadCount();
+      };
+      
+      window.addEventListener('focus', handleFocus);
+      window.addEventListener('visibilitychange', () => {
+        if (!document.hidden) {
+          loadUnreadCount();
+        }
+      });
+      
       // Socket event listeners
       socketService.onMessageReceived((messageData) => {
         dispatch({ type: CHAT_ACTIONS.ADD_MESSAGE, payload: messageData });
-        // Update unread count if message is not from current user
-        if (messageData.sender_id !== user.id) {
+        // Always update unread count when a message is received
+        // This ensures the counter updates in real-time
+        setTimeout(() => {
           loadUnreadCount();
-        }
+        }, 100);
       });
 
       socketService.onUserTyping((data) => {
@@ -158,9 +201,12 @@ export function ChatProvider({ children }) {
 
       return () => {
         socketService.disconnect();
+        clearInterval(unreadCountInterval);
+        window.removeEventListener('focus', handleFocus);
+        window.removeEventListener('visibilitychange', handleFocus);
       };
     }
-  }, [user]);
+  }, [user, loadUnreadCount]);
 
   // Load conversations
   const loadConversations = async () => {
@@ -193,8 +239,10 @@ export function ChatProvider({ children }) {
         await chatService.markMessagesRead(partnerId);
         dispatch({ type: CHAT_ACTIONS.MARK_MESSAGES_READ, payload: { partnerId } });
         
-        // Update unread count
-        loadUnreadCount();
+        // Update unread count after marking messages as read
+        setTimeout(() => {
+          loadUnreadCount();
+        }, 100);
       }
     } catch (error) {
       dispatch({ type: CHAT_ACTIONS.SET_ERROR, payload: error.message });
@@ -246,24 +294,6 @@ export function ChatProvider({ children }) {
     }
   };
 
-  // Load unread count
-  const loadUnreadCount = async () => {
-    try {
-      const response = await chatService.getUnreadCount();
-      if (response.success) {
-        dispatch({ 
-          type: CHAT_ACTIONS.SET_UNREAD_COUNT, 
-          payload: { 
-            total: response.total_unread, 
-            conversations: response.unread_conversations 
-          } 
-        });
-      }
-    } catch (error) {
-      console.error('Failed to load unread count:', error);
-    }
-  };
-
   // Leave chat
   const leaveChat = (partnerId) => {
     if (user) {
@@ -278,6 +308,13 @@ export function ChatProvider({ children }) {
     dispatch({ type: CHAT_ACTIONS.CLEAR_ERROR });
   };
 
+  // Refresh unread count manually
+  const refreshUnreadCount = () => {
+    if (user) {
+      loadUnreadCount();
+    }
+  };
+
   const contextValue = {
     ...state,
     loadConversations,
@@ -287,6 +324,7 @@ export function ChatProvider({ children }) {
     searchUsers,
     sendTyping,
     loadUnreadCount,
+    refreshUnreadCount,
     leaveChat,
     clearError
   };

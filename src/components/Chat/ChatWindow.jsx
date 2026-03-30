@@ -30,13 +30,10 @@ const ChatWindow = () => {
     if (isTyping && activeChat) {
       sendTyping(activeChat.id, true);
       
-      // Clear previous timeout
       if (typingTimeoutRef.current) {
         clearTimeout(typingTimeoutRef.current);
       }
-      
-      // Set timeout to stop typing indicator
-      typingTimeoutRef.current = setTimeout(() => {
+            typingTimeoutRef.current = setTimeout(() => {
         sendTyping(activeChat.id, false);
         setIsTyping(false);
       }, 1000);
@@ -89,16 +86,16 @@ const ChatWindow = () => {
   }
 
   return (
-    <div className="chat-window">
+    <div className="msg-chat-window">
       {/* Chat Header */}
-      <div className="chat-header">
-        <div className="chat-partner-info">
-          <div className="partner-avatar">
+      <div className="msg-chat-header">
+        <div className="msg-chat-partner-info">
+          <div className="msg-partner-avatar">
             {activeChat.name.charAt(0).toUpperCase()}
           </div>
-          <div className="partner-details">
-            <h3 className="partner-name">{activeChat.name}</h3>
-            <p className="partner-status">
+          <div className="msg-partner-details">
+            <h3 className="msg-partner-name">{activeChat.name}</h3>
+            <p className="msg-partner-status">
               {activeChat.role === 'employer' ? 
                 `${activeChat.company || 'Company'}` : 
                 'Job Seeker'
@@ -107,24 +104,24 @@ const ChatWindow = () => {
           </div>
         </div>
         
-        <div className="chat-actions">
-          <button className="action-btn" title="Voice Call">
+        <div className="msg-chat-actions">
+          <button className="msg-action-btn" title="Voice Call">
             <Phone size={20} />
           </button>
-          <button className="action-btn" title="Video Call">
+          <button className="msg-action-btn" title="Video Call">
             <Video size={20} />
           </button>
-          <button className="action-btn" title="More Options">
+          <button className="msg-action-btn" title="More Options">
             <MoreVertical size={20} />
           </button>
         </div>
       </div>
 
       {/* Messages Area */}
-      <div className="messages-container">
-        <div className="messages-list">
+      <div className="msg-messages-container">
+        <div className="msg-messages-list">
           {messages.length === 0 ? (
-            <div className="empty-messages">
+            <div className="msg-empty-messages">
               <p>No messages yet. Start the conversation!</p>
             </div>
           ) : (
@@ -136,21 +133,21 @@ const ChatWindow = () => {
               return (
                 <div
                   key={message.id}
-                  className={`message-item ${isOwn ? 'own' : 'partner'}`}
+                  className={`msg-message-item ${isOwn ? 'msg-own' : 'msg-partner'}`}
                 >
                   {!isOwn && showAvatar && (
-                    <div className="message-avatar">
+                    <div className="msg-message-avatar">
                       {message.sender_name.charAt(0).toUpperCase()}
                     </div>
                   )}
                   
-                  <div className="message-content">
+                  <div className="msg-message-content">
                     {!isOwn && showAvatar && (
-                      <p className="message-sender">{message.sender_name}</p>
+                      <p className="msg-message-sender">{message.sender_name}</p>
                     )}
-                    <div className="message-bubble">
-                      <p className="message-text">{message.message}</p>
-                      <span className="message-time">
+                    <div className="msg-message-bubble">
+                      <p className="msg-message-text">{message.message}</p>
+                      <span className="msg-message-time">
                         {formatMessageTime(message.timestamp)}
                       </span>
                     </div>
@@ -162,17 +159,17 @@ const ChatWindow = () => {
           
           {/* Typing Indicator */}
           {isPartnerTyping && (
-            <div className="message-item partner">
-              <div className="message-avatar">
+            <div className="msg-message-item msg-partner">
+              <div className="msg-message-avatar">
                 {activeChat.name.charAt(0).toUpperCase()}
               </div>
-              <div className="typing-indicator">
-                <div className="typing-dots">
+              <div className="msg-typing-indicator">
+                <div className="msg-typing-dots">
                   <span></span>
                   <span></span>
                   <span></span>
                 </div>
-                <p className="typing-text">{activeChat.name} is typing...</p>
+                <p className="msg-typing-text">{activeChat.name} is typing...</p>
               </div>
             </div>
           )}
@@ -182,20 +179,20 @@ const ChatWindow = () => {
       </div>
 
       {/* Message Input */}
-      <div className="message-input-container">
-        <form onSubmit={handleSendMessage} className="message-form">
-          <div className="input-wrapper">
+      <div className="msg-message-input-container">
+        <form onSubmit={handleSendMessage} className="msg-message-form">
+          <div className="msg-input-wrapper">
             <input
               type="text"
               value={messageInput}
               onChange={handleInputChange}
               placeholder={`Message ${activeChat.name}...`}
-              className="message-input"
+              className="msg-message-input"
               autoFocus
             />
             <button
               type="submit"
-              className="send-button"
+              className="msg-send-button"
               disabled={!messageInput.trim()}
             >
               <Send size={20} />

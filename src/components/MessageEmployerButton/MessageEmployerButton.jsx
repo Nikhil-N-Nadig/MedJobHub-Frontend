@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import './MessageEmployerButton.css';
 
 const MessageEmployerButton = ({ application }) => {
-  const { startChat } = useChat();
+  const { startChat, loadChatMessages } = useChat();
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.userData);
 
@@ -28,12 +28,15 @@ const MessageEmployerButton = ({ application }) => {
 
     try {
       await startChat(employerId);
-      navigate('/chat');
+      // ensure messages for this partner are loaded so Chat shows the correct thread immediately
+      await loadChatMessages(employerId);
+      navigate(`/chat?partner=${employerId}`);
     } catch (error) {
       console.error('Failed to start chat:', error);
     }
   };
 
+  // Hide button if not logged in or trying to chat with self or missing employer
   if (!user || user.id === application.job.posted_by || !application.job.posted_by) {
     return null;
   }
@@ -42,17 +45,20 @@ const MessageEmployerButton = ({ application }) => {
 
   return (
     <button 
-      className="message-employer-btn"
+      className="msg-message-employer-btn"
       onClick={handleStartChat}
       title={`Send message to ${companyName}`}
     >
-      <div className="btn-content">
-        <div className="btn-icon">
-          <MessageCircle size={18} />
-        </div>
-        <div className="btn-text">
-          <span className="btn-title">Message Employer</span>
-          <span className="btn-subtitle">
+      <div className="msg-btn-content">
+        {/* Only show message icon for employers, not job seekers */}
+        {user.role === 'employer' && (
+          <div className="msg-btn-icon">
+            <MessageCircle size={18} />
+          </div>
+        )}
+        <div className="msg-btn-text">
+          <span className="msg-btn-title">Message Employer</span>
+          <span className="msg-btn-subtitle">
             <Building size={12} />
             {companyName}
           </span>

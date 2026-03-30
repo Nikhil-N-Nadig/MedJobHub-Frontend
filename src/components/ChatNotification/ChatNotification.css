@@ -1,4 +1,4 @@
-.chat-notification-btn {
+.msg-chat-notification-btn {
   position: relative;
   display: flex;
   align-items: center;
@@ -13,12 +13,12 @@
   transition: all 0.2s ease;
 }
 
-.chat-notification-btn:hover {
+.msg-chat-notification-btn:hover {
   background-color: #f7fafc;
   color: #3182ce;
 }
 
-.notification-badge {
+.msg-notification-badge {
   position: absolute;
   top: -2px;
   right: -2px;

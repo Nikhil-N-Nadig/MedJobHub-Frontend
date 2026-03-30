@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import './QuickChatButton.css';
 
 const QuickChatButton = ({ targetUserId, targetUserName, className = '' }) => {
-  const { startChat } = useChat();
+  const { startChat, loadChatMessages } = useChat();
   const navigate = useNavigate();
   const user = useSelector((state) => state.auth.userData);
 
@@ -27,7 +27,8 @@ const QuickChatButton = ({ targetUserId, targetUserName, className = '' }) => {
 
     try {
       await startChat(targetUserId);
-      navigate('/chat');
+      await loadChatMessages(targetUserId);
+      navigate(`/chat?partner=${targetUserId}`);
     } catch (error) {
       console.error('Failed to start chat:', error);
     }
@@ -42,7 +43,7 @@ const QuickChatButton = ({ targetUserId, targetUserName, className = '' }) => {
 
   return (
     <button 
-      className={`quick-chat-btn ${className}`}
+      className={`msg-quick-chat-btn ${className}`}
       onClick={handleStartChat}
       title={`Send message to ${displayName}`}
     >

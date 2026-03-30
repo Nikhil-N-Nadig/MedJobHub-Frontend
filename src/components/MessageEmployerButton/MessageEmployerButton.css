@@ -1,4 +1,4 @@
-.message-employer-btn {
+.msg-message-employer-btn {
   width: 100%;
   background: linear-gradient(135deg, #3182ce, #2c5aa0);
   color: white;
@@ -13,7 +13,7 @@
   overflow: hidden;
 }
 
-.message-employer-btn::before {
+.msg-message-employer-btn::before {
   content: '';
   position: absolute;
   top: 0;
@@ -24,17 +24,17 @@
   transition: left 0.6s ease;
 }
 
-.message-employer-btn:hover {
+.msg-message-employer-btn:hover {
   background: linear-gradient(135deg, #2c5aa0, #2a4f8e);
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(49, 130, 206, 0.4);
 }
 
-.message-employer-btn:hover::before {
+.msg-message-employer-btn:hover::before {
   left: 100%;
 }
 
-.btn-content {
+.msg-btn-content {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -42,7 +42,7 @@
   z-index: 1;
 }
 
-.btn-icon {
+.msg-btn-icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -53,21 +53,21 @@
   flex-shrink: 0;
 }
 
-.btn-text {
+.msg-btn-text {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   flex: 1;
 }
 
-.btn-title {
+.msg-btn-title {
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 2px;
   text-align: left;
 }
 
-.btn-subtitle {
+.msg-btn-subtitle {
   font-size: 13px;
   opacity: 0.9;
   display: flex;
@@ -77,24 +77,24 @@
 }
 
 @media (max-width: 768px) {
-  .message-employer-btn {
+  .msg-message-employer-btn {
     padding: 14px 16px;
   }
   
-  .btn-content {
+  .msg-btn-content {
     gap: 10px;
   }
   
-  .btn-icon {
+  .msg-btn-icon {
     width: 36px;
     height: 36px;
   }
   
-  .btn-title {
+  .msg-btn-title {
     font-size: 15px;
   }
   
-  .btn-subtitle {
+  .msg-btn-subtitle {
     font-size: 12px;
   }
 }

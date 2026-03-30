@@ -1,4 +1,4 @@
-.quick-chat-btn {
+.msg-quick-chat-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -22,7 +22,7 @@
   letter-spacing: 0.5px;
 }
 
-.quick-chat-btn::before {
+.msg-quick-chat-btn::before {
   content: '';
   position: absolute;
   top: 0;
@@ -33,7 +33,7 @@
   transition: left 0.6s ease;
 }
 
-.quick-chat-btn:hover {
+.msg-quick-chat-btn:hover {
   background: linear-gradient(135deg, #236946, #1a5235);
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(46, 139, 87, 0.4);
@@ -41,28 +41,28 @@
   text-decoration: none;
 }
 
-.quick-chat-btn:hover::before {
+.msg-quick-chat-btn:hover::before {
   left: 100%;
 }
 
-.quick-chat-btn:disabled {
+.msg-quick-chat-btn:disabled {
   background: linear-gradient(135deg, #ccc, #999);
   cursor: not-allowed;
   transform: none;
 }
 
-.quick-chat-btn.employer {
+.msg-quick-chat-btn.employer {
   background: linear-gradient(135deg, #3182ce, #2c5aa0);
   box-shadow: 0 4px 15px rgba(49, 130, 206, 0.2);
 }
 
-.quick-chat-btn.employer:hover {
+.msg-quick-chat-btn.employer:hover {
   background: linear-gradient(135deg, #2c5aa0, #2a4f8e);
   box-shadow: 0 8px 25px rgba(49, 130, 206, 0.4);
 }
 
 @media (max-width: 768px) {
-  .quick-chat-btn {
+  .msg-quick-chat-btn {
     padding: 10px 16px;
     font-size: 13px;
   }

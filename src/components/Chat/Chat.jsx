@@ -4,35 +4,47 @@ import ChatSidebar from './ChatSidebar';
 import ChatWindow from './ChatWindow';
 import UserSearch from './UserSearch';
 import './Chat.css';
+import { useLocation } from 'react-router-dom';
 
 const Chat = () => {
-  const { activeChat, loadConversations, loadUnreadCount } = useChat();
+  const { activeChat, loadConversations, loadUnreadCount, loadChatMessages } = useChat();
   const [showUserSearch, setShowUserSearch] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     loadConversations();
     loadUnreadCount();
   }, []);
 
+  // If a partner query param is provided (e.g. /chat?partner=123), load that partner's messages
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const partnerId = params.get('partner');
+    if (partnerId) {
+      // load messages for the partner
+      loadChatMessages(partnerId);
+    }
+  }, [location.search]);
+
   return (
-    <div className="chat-container">
-      <div className="chat-layout">
-        <div className="chat-sidebar">
+    <div className="msg-chat-container">
+      <div className="msg-chat-layout">
+        <div className="msg-chat-sidebar">
           <ChatSidebar 
             onNewChat={() => setShowUserSearch(true)}
           />
         </div>
 
-        <div className="chat-main">
+        <div className="msg-chat-main">
           {activeChat ? (
             <ChatWindow />
           ) : (
-            <div className="chat-welcome">
-              <div className="welcome-content">
+            <div className="msg-chat-welcome">
+              <div className="msg-welcome-content">
                 <h2>Welcome to MedJobHub Chat</h2>
                 <p>Select a conversation from the sidebar or start a new chat to begin messaging.</p>
                 <button 
-                  className="btn-primary"
+                  className="msg-btn-primary"
                   onClick={() => setShowUserSearch(true)}
                 >
                   Start New Chat

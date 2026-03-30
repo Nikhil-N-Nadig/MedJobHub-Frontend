@@ -26,13 +26,13 @@ const ChatNotification = () => {
 
   return (
     <button 
-      className="chat-notification-btn" 
+      className="msg-chat-notification-btn" 
       onClick={handleChatClick}
       title="Messages"
     >
       <MessageCircle size={20} />
       {unreadCount > 0 && (
-        <span className="notification-badge">
+        <span className="msg-notification-badge">
           {unreadCount > 99 ? '99+' : unreadCount}
         </span>
       )}
