@@ -1,42 +1,109 @@
+/* Cleaned and consolidated Chatbot styles
+   - Removed duplicates
+   - Locked button height so icon can overflow without resizing
+   - Icon slot (.ai-mark) is a fixed box; image is absolutely positioned and can be made larger (+5px)
+*/
+
 /* Floating Button */
 .chatbot-btn {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
-  background: #007bff;
-  color: white;
+  bottom: 26px;
+  right: 28px;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  min-height: 46px;        /* reduced height */
+  padding: 8px 18px;       /* smaller top/bottom padding */
+  border-radius: 40px;     /* slimmer pill */
+
+  background: linear-gradient(135deg, #2c62ff, #6aa6ff);
+  color: #fff;
   border: none;
-  font-size: 28px;
-  padding: 14px 18px;
-  border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3);
-  z-index: 10000;
-  transition: 0.3s ease;
+
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+
+  box-shadow: 0 10px 30px rgba(44,98,255,0.18);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 
 .chatbot-btn:hover {
-  transform: scale(1.1);
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 14px 36px rgba(44,98,255,0.22);
 }
 
-/* Chat Window */
+/* Icon Slot */
+.ai-mark {
+  width: 34px;             /* reduced size */
+  height: 34px;
+  position: relative;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+
+  transition: transform 0.16s ease, opacity 0.16s ease;
+}
+
+/* Icon Image */
+.ai-mark-img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 38px;             /* reduced from 48px */
+  height: 38px;
+
+  object-fit: contain;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.12));
+  transition: transform 160ms ease;
+}
+
+/* subtle hover lift for the icon */
+.chatbot-btn:hover .ai-mark {
+  transform: translateY(-3px);
+}
+.chatbot-btn:hover .ai-mark-img {
+  transform: translate(-50%, -50%) scale(1.03);
+}
+
+/* Label / text */
+.chat-label {
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+/* Chat window (unchanged behavior, consolidated) */
 .chatbot-window {
   position: fixed;
-  bottom: 90px;
+  bottom: 90px;               /* sits above the button */
   right: 30px;
   width: 330px;
   height: 430px;
-  background: white;
+  display: flex;
+  flex-direction: column;
+
+  background: #fff;
   border-radius: 16px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+
   overflow: hidden;
   transform: translateY(20px);
   opacity: 0;
   pointer-events: none;
   transition: 0.3s ease;
   z-index: 10000;
-  display: flex;
-  flex-direction: column;
 }
 
 .chatbot-window.open {
@@ -45,26 +112,24 @@
   pointer-events: auto;
 }
 
-/* Header */
 .chatbot-header {
-  background: linear-gradient(135deg, #007bff, #0056b3);
-  padding: 12px;
-  color: white;
-  font-weight: bold;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  color: #fff;
+  font-weight: bold;
+  background: linear-gradient(135deg, #007bff, #0056b3);
 }
 
 .chatbot-header button {
   background: transparent;
-  color: white;
+  color: inherit;
   border: none;
   font-size: 18px;
   cursor: pointer;
 }
 
-/* Messages */
 .chatbot-body {
   flex: 1;
   padding: 10px;
@@ -83,7 +148,7 @@
 
 .chat-msg.user {
   background: #007bff;
-  color: white;
+  color: #fff;
   margin-left: auto;
   border-bottom-right-radius: 4px;
 }
@@ -95,11 +160,10 @@
   border-bottom-left-radius: 4px;
 }
 
-/* Input Area */
 .chatbot-input-area {
-  padding: 12px;
   display: flex;
-  background: white;
+  padding: 12px;
+  background: #fff;
   border-top: 1px solid #e0e0e0;
 }
 
@@ -114,7 +178,7 @@
 
 .send-btn {
   background: #007bff;
-  color: white;
+  color: #fff;
   border: none;
   padding: 0 15px;
   margin-left: 10px;

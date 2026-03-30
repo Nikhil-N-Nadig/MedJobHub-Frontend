@@ -2,6 +2,10 @@ import React, { useState, useRef, useEffect } from "react";
 import "./Chatbot.css";
 import backendService from "../../Flask_service/flask";
 import { useNavigate } from "react-router-dom";
+// match Header.jsx: inline images object (same header image source)
+const images = {
+  header_img: "https://res.cloudinary.com/dcslhsano/image/upload/v1743537217/z67scxkigrn9si4mgzv1.png"
+};
 
 /**
  * Robust Chatbot component (PARA streaming version)
@@ -124,9 +128,16 @@ export default function Chatbot() {
 
   return (
     <>
-      {/* Floating Chat Button */}
-      <button className="chatbot-btn" onClick={() => setOpen(!open)}>
-        💬
+      {/* Floating Chat Button (removed "AI" badge; larger logo + larger button) */}
+      <button
+        className="chatbot-btn"
+        aria-label="Open chat"
+        onClick={() => setOpen(!open)}
+      >
+        <div className="ai-mark" aria-hidden="true">
+          <img src={images.header_img} alt="stethoscope mark" className="ai-mark-img" />
+        </div>
+        <span className="chat-label">Ask MedAI</span>
       </button>
 
       {/* Chat Window */}
