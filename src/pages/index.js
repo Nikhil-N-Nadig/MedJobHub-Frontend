@@ -11,5 +11,6 @@ import JobListings from "./JobsList/JobsList";
 import JobApplications from "./ApplicationList/ApplicationList";
 import JobInfo from "./JobInfo/JobInfo";
 import JobDetails from "./JobDetails/JobDetails";
+import ChatPage from "./Chat/ChatPage";
 import Profile from "./Profile/Profile";
-export {Home,About,Jobs,ContactUs,SignIn,SignUp,Verifyotp,AddJobForm,ApplyJobForm,JobListings,JobApplications,JobInfo,JobDetails, Profile}
+export {Home,About,Jobs,ContactUs,SignIn,SignUp,Verifyotp,AddJobForm,ApplyJobForm,JobListings,JobApplications,JobInfo,JobDetails,ChatPage, Profile}

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Logout from "../Logout/Logout";
+import { useChat } from '../../context/ChatContext';
 import "../Header/Header.css";
 
 const images = {
@@ -12,6 +13,10 @@ function Header() {
   const location = useLocation();
   const user = useSelector((state) => state.auth.userData);
   const role = user?.role;
+  const { unreadCount } = useChat();
+  
+  // Debug log to see unread count updates
+  console.log('Header unread count:', unreadCount);
 
   // State to control mobile menu visibility
   const [menuOpen, setMenuOpen] = useState(false);
@@ -58,6 +63,12 @@ function Header() {
                     <li><Link to="/job-applications" className={location.pathname === "/job-applications" ? "active" : ""} onClick={toggleMenu}>Applied Jobs</Link></li>
                   </>
                 )}
+                <li><Link to="/chat" className={location.pathname === "/chat" ? "active" : ""} onClick={toggleMenu}>
+                  Messages
+                  {unreadCount > 0 && (
+                    <span className="nav-unread-badge mobile" title={`${unreadCount} unread`}>{unreadCount > 99 ? '99+' : unreadCount}</span>
+                  )}
+                </Link></li>
                 <li><Link to="/profile" className={location.pathname === "/profile" ? "active" : ""} onClick={toggleMenu}>Profile</Link></li>
                 <li><Logout /></li>
               </>
@@ -97,6 +108,14 @@ function Header() {
                     <li><Link to="/job-applications" className={location.pathname === "/job-applications" ? "active" : ""}>Applied Jobs</Link></li>
                   </>
                 )}
+                <li><Link to="/chat" className={location.pathname === "/chat" ? "active" : ""}>
+                  Messages
+                  {unreadCount > 0 && (
+                    <span className="nav-unread-badge" title={`${unreadCount} unread`}>
+                      {unreadCount > 99 ? '99+' : unreadCount}
+                    </span>
+                  )}
+                </Link></li>
                 <li><Link to="/profile" className={location.pathname === "/profile" ? "active" : ""}>Profile</Link></li>
                 <li><Logout /></li>
               </>

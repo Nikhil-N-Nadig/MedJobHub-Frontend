@@ -4,6 +4,8 @@ import backendService from "../../Flask_service/flask";
 import { useFlash } from "../../context/FlashContext";
 import ConfirmModal from "../ConfirmModel/ConfirmModel";
 import { Link } from "react-router-dom";
+import QuickChatButton from "../QuickChatButton/QuickChatButton";
+import MessageEmployerButton from "../MessageEmployerButton/MessageEmployerButton";
 
 const ApplicationCard = ({ application, userRole, userId, onUpdateStatus, onWithdraw, headerTitle }) => {
   const [status, setStatus] = useState(application.application_status);
@@ -111,13 +113,11 @@ const ApplicationCard = ({ application, userRole, userId, onUpdateStatus, onWith
                 </button>
               </form>
               
-              <Link
-                to={`/chat/${userId}/${application.applicant.id}`}
-                className="appli-apply-btn"
-                style={{ marginTop: "5px" }}
-              >
-                Chat with Candidate
-              </Link>
+              <QuickChatButton 
+                targetUserId={application.applicant.id}
+                targetUserName={application.applicant_name}
+                className="employer"
+              />
             </>
           ) : (
             <>
@@ -125,13 +125,7 @@ const ApplicationCard = ({ application, userRole, userId, onUpdateStatus, onWith
                 {withdrawing ? "Withdrawing..." : "Withdraw Application"}
               </button>
 
-              <Link
-                to={`/chat/${userId}/${application.job.posted_by}`}
-                className="appli-apply-btn"
-                style={{ marginTop: "5px", backgroundColor: "#2e8b57" }}
-              >
-                Chat with Employer
-              </Link>
+              <MessageEmployerButton application={application} />
             </>
           )}
       </div>
